@@ -97,6 +97,13 @@ class PodcastCrawler
 
             libxml_use_internal_errors(true);
 
+            if($response['status_code'] !== 200){
+                return [
+                    'status_code' => $response['status_code'],
+                    'message'     => 'error'
+                ];
+            }
+
             try {
                 $feed = new SimpleXMLElement($response['feed'], LIBXML_NOCDATA, false);
             } catch (Exception $except) {
